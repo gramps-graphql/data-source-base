@@ -1,0 +1,331 @@
+# Expose Cloud Foundry queries in the Query type.
+extend type Query {
+  # Get info about a Cloud Foundry app by its ID.
+  CloudFoundryApp(
+    # The app’s GUID. Found at /dashboard/apps if you’re not sure what it is.
+    appGuid: String
+  ): CFA_CloudFoundryApp
+}
+
+extend type Mutation {
+  UpdateCloudFoundryApp(
+    appGuid: String
+    updates: CFA_UpdateCloudFoundryApp
+  ): CFA_CloudFoundryApp
+}
+
+# App data from Cloud Foundry
+interface CFA_CloudFoundryApp {
+  # The unique ID of this app. This is used in URIs and other requests.
+  appGuid: String!
+  # The user-assigned name of the app. May change at any time.
+  name: String!
+  # Whether or not the app is in production mode.
+  production: Boolean
+  # The unique identifier of this app’s space.
+  space_guid: String
+  # TODO what is this?
+  stack_guid: String
+  # The buildpack (e.g. Liberty for Java) this app is running on.
+  buildpack: String
+  # If no buildpack is set, one will be detected and stored in this field.
+  detected_buildpack: String
+  # The unique ID of the detected buildpack
+  detected_buildpack_guid: String
+  # Environment variables for the app in JSON format (stringified).
+  environment_json: String
+  # The amount of memory in MB currently allocated to this app.
+  memory: Int!
+  # The total number of instances (running and not running) of this app.
+  instances: Int!
+  # The maximum amount of memory available for this account.
+  disk_quota: Int!
+  # The current state of the app.
+  state: CFA_AppState
+  # TODO what is this? The version of the app? buildpack? Cloud Foundry?
+  version: String
+  # TODO what is this? How is it used?
+  command: String
+  # TODO what is this? How is it used?
+  console: String
+  # TODO what is this? How is it used?
+  debug: String
+  # TODO what is this? How is it used?
+  staging_task_id: String
+  # TODO what is this? How is it used?
+  package_state: String
+  # TODO what is this? How is it used?
+  health_check_http_endpoint: String
+  # TODO what is this? How is it used?
+  health_check_type: String
+  # TODO what is this? How is it used?
+  health_check_timeout: String
+  # If staging failed, this field will contain the reason for the failure.
+  staging_failed_reason: String
+  # If staging failed, this field will contain a description of the failure.
+  staging_failed_description: String
+  # Whether or not the app has been migrated to Diego.
+  diego: Boolean
+  # TODO what does this return? A URI? File path? Command?
+  docker_image: String
+  # Date of the most recent update to the package. (TODO does package mean app?)
+  package_updated_at: String
+  # Fallback command to start the app if none is set.
+  detected_start_command: String
+  # TODO what is this? SSH access for the user?
+  enable_ssh: Boolean
+  # Stringified JSON
+  docker_credentials_json: String
+  # TODO what is this? How is it used?
+  ports: [Int]
+}
+
+enum CFA_AppState {
+  STARTED
+  STARTING
+  STOPPED
+  STOPPING
+  NOTRUNNING
+}
+
+type CFA_CloudFoundryAppSummary implements CFA_CloudFoundryApp {
+  #Interface Fields
+
+  appGuid: String!
+  name: String!
+  production: Boolean
+  space_guid: String
+  stack_guid: String
+  buildpack: String
+  detected_buildpack: String
+  detected_buildpack_guid: String
+  environment_json: String
+  memory: Int!
+  instances: Int!
+  disk_quota: Int!
+  state: CFA_AppState
+  version: String
+  command: String
+  console: String
+  debug: String
+  staging_task_id: String
+  package_state: String
+  health_check_http_endpoint: String
+  health_check_type: String
+  health_check_timeout: String
+  staging_failed_reason: String
+  staging_failed_description: String
+  diego: Boolean
+  docker_image: String
+  package_updated_at: String
+  detected_start_command: String
+  enable_ssh: Boolean
+  docker_credentials_json: String
+  ports: [Int]
+  # Implementation Fields
+
+  # Available routes registered to expose this app via URL.
+  routes: [CFA_Route]
+  # Number of app instances currently running.
+  running_instances: Int!
+  # If the user has connected other Bluemix services to this app (e.g. a
+  # database, a deployment pipeline), they’ll be returned in this array.
+  services: [CFA_ConnectedService]
+  # All currently registered domains available for creating routes.
+  available_domains: [CFA_Domain]
+}
+
+# Domains added to the account can be used to give the app a custom public link.
+type CFA_Domain {
+  # A unique identifier for the domain.
+  domainGuid: String!
+  # The name of the domain with no protocol (e.g. example.org).
+  name: String
+  # TODO what is this? How is it used?
+  router_group_guid: String
+  # TODO what is this? How is it used?
+  router_group_type: String
+}
+
+type CFA_Route {
+  # A unique identifier for the route.
+  routerGuid: String!
+  # The app that uses this route.
+  host: String!
+  # TODO what is this? How is it used?
+  port: String
+  # TODO what is this? How is it used?
+  path: String
+  # The domain this route applies to.
+  domain: CFA_Domain
+}
+
+# Services connected to the current app, such as databases or performance tools.
+type CFA_ConnectedService {
+  # The unique identifier for the service.
+  serviceGuid: String!
+  # The user-assigned name of the service.
+  name: String!
+  # The number of apps connected to this service.
+  bound_app_count: Int
+  # Information about the last operation performed by this service.
+  last_operation: CFA_Operation
+  # A link to manage the service in the Bluemix dashboard.
+  dashboard_url: String
+  # Information about the user’s current billing plan for the service.
+  service_plan: CFA_ServicePlan
+}
+
+# Details about a given service’s current service plan.
+type CFA_ServicePlan {
+  # A unique identifier for the service plan.
+  servicePlanGuid: String!
+  # The name of the service plan (e.g. Platinum).
+  name: String!
+  # Details about the service itself.
+  service: CFA_Service
+}
+
+# Details about a Bluemix service. This is the information in the catalog; it
+# is not related to the user’s account or apps in any way other than describing
+# what they’re using.
+type CFA_Service {
+  # The service’s unique identifier.
+  serviceGuid: String!
+  # A label describing the service.
+  label: String
+  # TODO what is this? How is it used?
+  provider: String
+  # TODO what is this? How is it used?
+  version: String
+}
+
+# Information about a service’s operations.
+type CFA_Operation {
+  # What kind of operation was performed.
+  type: String
+  # The status of the operation (e.g. succeeded).
+  state: String
+  # An optional description of the operation.
+  description: String
+  # If the operation was updated, the date of the most recent update.
+  updated_at: String
+  # The date the operation was performed.
+  created_at: String
+}
+
+type CFA_CloudFoundryAppUpdate implements CFA_CloudFoundryApp {
+  #Interface Fields
+
+  appGuid: String!
+  name: String!
+  production: Boolean
+  space_guid: String
+  stack_guid: String
+  buildpack: String
+  detected_buildpack: String
+  detected_buildpack_guid: String
+  environment_json: String
+  memory: Int!
+  instances: Int!
+  disk_quota: Int!
+  state: CFA_AppState
+  version: String
+  command: String
+  console: String
+  debug: String
+  staging_task_id: String
+  package_state: String
+  health_check_http_endpoint: String
+  health_check_type: String
+  health_check_timeout: String
+  staging_failed_reason: String
+  staging_failed_description: String
+  diego: Boolean
+  docker_image: String
+  package_updated_at: String
+  detected_start_command: String
+  enable_ssh: Boolean
+  docker_credentials_json: String
+  ports: [Int]
+  #Implementaion Fields
+
+  # i.e. "/v2/apps/ddd7e3cd-1b2e-4154-a109-0b4e7ba14447"
+  url: String
+  created_at: String
+  updated_at: String
+  space_url: String
+  stack_url: String
+  routes_url: String
+  events_url: String
+  service_bindings_url: String
+  route_mappings_url: String
+}
+
+# Input fields to update a Cloud Foundry app
+# See https://apidocs.cloudfoundry.org/253/apps/updating_an_app.html
+input CFA_UpdateCloudFoundryApp {
+  # The name of the app, i.e. my_super_app
+  name: String
+  # The amount of memory each instance should have. In megabytes, i.e. 512, 1024
+  memory: Int
+  # The number of instances of the app to run, i.e. 2, 6, 10
+  # To ensure optimal availability, ensure there are at least 2 instances.
+  instances: Int
+  # The maximum amount of disk available to an instance of an app. In megabytes, i.e. 1024, 2048
+  disk_quota: Int
+  # The guid of the associated space.
+  space_guid: String
+  # The guid of the associated stack.
+  stack_guid: String
+  # The guid of the associated stack.
+  state: CFA_AppStateInput
+  # The command to start an app after it is staged, maximum length: 4096, i.e. 'npm start'
+  command: String
+  # Buildpack to build the app
+  # 3 options:
+  #   Blank, meaning autodetection
+  #   A Git Url pointing to a buildpack: https://github.com/virtualstaticvoid/heroku-buildpack-r.git
+  #   Name of an installed buildpack: an_example_installed_buildpack
+  buildpack: String
+  # Endpoint called to determine if the app is healthy, i.e. '/health'
+  health_check_http_endpoint: String
+  # Type of health check to perform.
+  health_check_type: CFA_HealthCheckType
+  # Timeout in seconds for health checking of an staged app when starting up
+  health_check_timeout: Int
+  # Use diego to stage and to run when available
+  diego: Boolean
+  # Enable SSHing into the app. Supported for Diego only.
+  enable_ssh: Boolean
+  #	Name of the Docker image containing the app.
+  # The "diego_docker" feature flag must be enabled in order to create Docker image apps.
+  docker_image: String
+  #	Docker credentials for pulling docker image.
+  docker_credentials: CFA_DockerCredentials
+  environment_json: [CFA_EnvVar]
+}
+
+enum CFA_AppStateInput {
+  STARTED
+  STOPPED
+}
+
+enum CFA_HealthCheckType {
+  http
+  # default value
+  port
+  process
+  # 'none' is deprecated and an alias to 'process'.
+  none
+}
+
+input CFA_DockerCredentials {
+  username: String
+  password: String
+}
+
+input CFA_EnvVar {
+  key: String
+  value: String
+}
