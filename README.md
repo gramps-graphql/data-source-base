@@ -1,17 +1,28 @@
-# Bluemix GraphQL Data Source: CloudFoundryApp
+# Bluemix GraphQL Data Source Base
 
-This data source exposes parts of the [Cloud Foundry API](https://apidocs.cloudfoundry.org/253/) via the [Bluemix GraphQL](https://github.ibm.com/bluemix/graphql) µ-service.
+- Provides templates for npm, Travis CI, and SonarQube
+- Provides TODO comments next to all items that need to be edited
+- Starts with the simplest possible example code to limit how much boilerplate editing is required
+- Starts you off right with test coverage at 💯
+- Provides testing helpers for common resolver testing patterns
+- Comes with docs! https://ibm.biz/graphql-data-source
 
-For more information about what data sources are and how they work, see https://ibm.biz/graphql-data-source
-
-## Development
-
-First, clone the repository and install dependencies:
+## Quickstart
 
 ```sh
-# Clone the repo and move into the directory folder
-git clone git@github.ibm.com:bluemix/graphql-data-source-cloudfoundryapp.git
-cd graphql-data-source-cloudfoundryapp/
+# Clone the repo
+git clone git@github.ibm.com:Bluemix/graphql-data-source-base.git graphql-data-source-YOUR_DATA_SOURCE_NAME
+
+# Move into it
+cd graphql-data-source-YOUR_DATA_SOURCE_NAME/
+
+# Change the remote repo
+git remote set-url origin git@github.ibm.com:Bluemix/YOUR_REPO_NAME.git
+
+# Create a package.json
+cp package.TEMPLATE.json package.json
+
+# IMPORTANT: Edit name, description, author, and repository in package.json
 
 # Install dependencies
 npm install
