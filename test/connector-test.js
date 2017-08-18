@@ -1,14 +1,17 @@
 import { GraphQLConnector } from '@console/graphql-data-source-helpers';
 import Connector from '../src/connector';
 
+// TODO: Update the data source name.
+const DATA_SOURCE_NAME = 'YourDataSource';
 const connector = new Connector();
 
-describe('CloudFoundry Connector', () => {
+describe(`${DATA_SOURCE_NAME}Connector`, () => {
   it('inherits the GraphQLConnector class', () => {
     expect(connector).toBeInstanceOf(GraphQLConnector);
   });
 
   it('uses the appropriate URL', () => {
-    expect(connector.apiBaseUri).toBe(`https://api.${process.env.cfDomain}/v2`);
+    // TODO: Update the data source API endpoint.
+    expect(connector.apiBaseUri).toBe(`https://example.org/v2`);
   });
 });

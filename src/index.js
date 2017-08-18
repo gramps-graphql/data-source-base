@@ -3,9 +3,13 @@ import resolvers from './resolvers';
 import Connector from './connector';
 import Model from './model';
 
+/*
+ * For more information on the main data source object, see
+ * https://ibm.biz/graphql-data-source-main
+ */
 export default {
-  // This is used to reference the model (e.g. context.YourModel.getAll())
-  context: 'CloudFoundryApp',
+  // TODO: Rename the context to describe the data source.
+  context: 'YourDataSource',
   model: new Model({ connector: new Connector() }),
   schema,
   resolvers,

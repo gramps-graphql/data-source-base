@@ -1,7 +1,12 @@
 {
-  "name": "@console/graphql-data-source-base",
-  "version": "0.0.0-semantic-release",
+  "name": "@console/graphql-data-source-[DATA_SOURCE_NAME]",
   "description": "This is a data source for the Bluemix GraphQL µ-service.",
+  "author": "Your Name <your.email@ibm.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.ibm.com:bluemix/[REPO_NAME].git"
+  },
+  "version": "0.0.0-semantic-release",
   "main": "src/index.js",
   "directories": {
     "test": "test"
@@ -21,14 +26,9 @@
     "test:unit": "NODE_ENV=test LOG4JS_LEVEL='OFF' jest --coverage",
     "test": "npm run lint --silent && npm run test:unit --silent"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.ibm.com:bluemix/graphql-data-source-base.git"
-  },
   "keywords": [
     "graphql"
   ],
-  "author": "Jason Lengstorf <jason.lengstorf@ibm.com> (https://lengstorf.com)",
   "license": "ISC",
   "dependencies": {
     "@console/graphql-data-source-helpers": "^1.0.2",

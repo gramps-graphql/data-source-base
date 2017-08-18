@@ -2,6 +2,7 @@ import { GraphQLModel } from '@console/graphql-data-source-helpers';
 import Model from '../src/model';
 import Connector from '../src/connector';
 
+// Mock the connector because we’re only testing the model here.
 jest.mock('../src/connector', () =>
   jest.fn(() => ({
     get: jest.fn(() => Promise.resolve()),
@@ -9,9 +10,13 @@ jest.mock('../src/connector', () =>
   })),
 );
 
+// TODO: Update the data source name.
+const DATA_SOURCE_NAME = 'YourDataSource';
+
 const connector = new Connector();
 const model = new Model({ connector });
 
+// TODO: Update this error to match the error format returned by your endpoint.
 const mockError = {
   statusCode: 401,
   error: {
@@ -23,17 +28,18 @@ const mockError = {
   },
 };
 
-describe('CloudFoundry Model', () => {
+describe(`${DATA_SOURCE_NAME}Model`, () => {
   it('inherits the GraphQLModel class', () => {
     expect(model).toBeInstanceOf(GraphQLModel);
   });
 
-  describe('getAppByGuid()', () => {
-    it('calls the correct endpoint with a given GUID', () => {
+  // TODO: Update this test to use your model’s method(s).
+  describe('getById()', () => {
+    it('calls the correct endpoint with a given ID', () => {
       const spy = jest.spyOn(connector, 'get');
 
-      model.getAppByGuid('1234');
-      expect(spy).toHaveBeenCalledWith('/apps/1234/summary');
+      model.getById('1234');
+      expect(spy).toHaveBeenCalledWith('/data/1234');
     });
 
     it('throws a BluemixGraphQLError if something goes wrong', async () => {
@@ -44,49 +50,8 @@ describe('CloudFoundry Model', () => {
       );
 
       try {
-        await model.getAppByGuid('1234');
-      } catch (error) {
-        expect(error.isBoom).toEqual(true);
-      }
-    });
-  });
-
-  describe('updateAppByGuid()', () => {
-    it('sends a request to the proper endpoint', () => {
-      const spy = jest.spyOn(connector, 'put');
-
-      model.updateAppByGuid('1234', {
-        foo: 'bar',
-        environment_json: [{ key: 'key', value: 'value' }],
-      });
-
-      expect(spy).toHaveBeenCalledWith('/apps/1234', {
-        foo: 'bar',
-        environment_json: { key: 'value' },
-      });
-    });
-
-    it('will not override env vars unless provided', () => {
-      const spy = jest.spyOn(connector, 'put');
-
-      model.updateAppByGuid('1234', {
-        foo: 'bar',
-      });
-
-      expect(spy).toHaveBeenCalledWith('/apps/1234', {
-        foo: 'bar',
-      });
-    });
-
-    it('throws a BluemixGraphQLError if something goes wrong', async () => {
-      expect.assertions(1);
-
-      model.connector.put.mockImplementationOnce(() =>
-        Promise.reject(mockError),
-      );
-
-      try {
-        await model.updateAppByGuid('1234', {});
+        // TODO: Update to use one of your model’s methods.
+        await model.getById('1234');
       } catch (error) {
         expect(error.isBoom).toEqual(true);
       }
@@ -94,16 +59,22 @@ describe('CloudFoundry Model', () => {
   });
 
   describe('handleError()', () => {
-    it('converts a Cloud Foundry error into a BluemixGraphQLError', async () => {
+    it('converts an error from the endpoint into a BluemixGraphQLError', async () => {
       expect.assertions(6);
 
+      /*
+       * To simulate a failed call, we tell Jest to return a rejected Promise
+       * with our mock error.
+       */
       model.connector.get.mockImplementationOnce(() =>
         Promise.reject(mockError),
       );
 
       try {
-        await model.getAppByGuid(1234);
+        // TODO: Update to use one of your model’s methods.
+        await model.getById(1234);
       } catch (error) {
+        // Check that BluemixGraphQLError properly received the error detail.
         expect(error).toHaveProperty('isBoom', true);
         expect(error.output).toHaveProperty('statusCode', 401);
         expect(error.output.payload).toHaveProperty(
@@ -117,7 +88,7 @@ describe('CloudFoundry Model', () => {
         );
         expect(error.output.payload).toHaveProperty(
           'graphqlModel',
-          'CloudFoundryAppModel',
+          `${DATA_SOURCE_NAME}Model`,
         );
       }
     });

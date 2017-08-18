@@ -1,9 +1,10 @@
 import { GraphQLConnector } from '@console/graphql-data-source-helpers';
 
-export default class CloudFoundryAppConnector extends GraphQLConnector {
+// TODO: change `YourDataSourceConnector` to a descriptive name
+export default class YourDataSourceConnector extends GraphQLConnector {
   /**
-   * Env-specific API endpoint for Cloud Foundry.
+   * TODO: describe this API endpoint
    * @member {string}
    */
-  apiBaseUri = `https://api.${process.env.cfDomain}/v2`;
+  apiBaseUri = `https://example.org/v2`;
 }

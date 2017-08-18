@@ -1,9 +1,12 @@
 import dataSource from '../src';
 import Model from '../src/model';
 
-describe('Data Source: CloudFoundryApp', () => {
+// TODO: Update the data source name.
+const DATA_SOURCE_NAME = 'YourDataSource';
+
+describe(`Data Source: ${DATA_SOURCE_NAME}`, () => {
   it('returns a context type', () => {
-    expect(dataSource.context).toBe('CloudFoundryApp');
+    expect(dataSource.context).toBe(DATA_SOURCE_NAME);
   });
 
   it('returns a model', () => {
@@ -17,7 +20,6 @@ describe('Data Source: CloudFoundryApp', () => {
   it('returns a resolver object', () => {
     expect(Object.keys(dataSource.resolvers)).toEqual([
       'queryResolvers',
-      'mutationResolvers',
       'dataResolvers',
       'mockResolvers',
     ]);
