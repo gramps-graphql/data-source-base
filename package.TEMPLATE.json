@@ -1,13 +1,14 @@
 {
   "name": "@console/graphql-data-source-[DATA_SOURCE_NAME]",
   "description": "This is a data source for the Bluemix GraphQL µ-service.",
-  "author": "Your Name <your.email@ibm.com>",
+  "contributors": [
+    "Your Name <your.email@ibm.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.ibm.com:bluemix/[REPO_NAME].git"
   },
-  "version": "0.0.0-semantic-release",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
@@ -24,16 +25,18 @@
     "atlas": "npm run proxy & npm run dev -- --atlas --config ./config/app_env_private.json",
     "lint": "eslint src/*.js",
     "test:unit": "NODE_ENV=test LOG4JS_LEVEL='OFF' jest --coverage",
-    "test": "npm run lint --silent && npm run test:unit --silent"
+    "test": "npm run lint --silent && npm run test:unit --silent",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "graphql"
   ],
   "license": "ISC",
   "dependencies": {
-    "@console/graphql-data-source-helpers": "^1.0.2",
+    "@console/gramps": "0.0.2",
     "casual": "^1.5.14",
-    "graphql-tools": "^1.2.1"
+    "graphql-tools": "^1.2.1",
+    "log4js": "^1.1.0"
   },
   "devDependencies": {
     "@console/graphql": "^1.2.0",
@@ -45,6 +48,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "condition-travis-enterprise": "^1.0.0",
     "del-cli": "^1.1.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
@@ -89,5 +93,6 @@
     "githubUrl": "https://github.ibm.com/",
     "githubApiPathPrefix": "api/v3",
     "verifyConditions": "condition-travis-enterprise"
-  }
+  },
+  "version": "0.0.0-semantic-release"
 }

@@ -1,7 +1,4 @@
-import {
-  GraphQLModel,
-  BluemixGraphQLError,
-} from '@console/graphql-data-source-helpers';
+import { GraphQLModel, GrampsError } from '@console/gramps';
 
 /*
  * For more information on data source models, see
@@ -22,7 +19,7 @@ export default class YourDataSourceModel extends GraphQLModel {
   }
 
   /**
-   * Throws a BluemixGraphQLError using information from the error response.
+   * Throws a GrampsError using information from the error response.
    *
    * @see https://ibm.biz/graphql-helpers
    *
@@ -30,8 +27,8 @@ export default class YourDataSourceModel extends GraphQLModel {
    * @return {void}
    */
   handleError(response) {
-    // TODO: map your endpoint’s error response to the BluemixGraphQL
-    throw BluemixGraphQLError({
+    // TODO: map your endpoint’s error response to the GrampsError format.
+    throw GrampsError({
       // An HTTP status code (e.g. 404).
       statusCode: response.statusCode,
       // A human-readable description of what went wrong (e.g. "Page not found").

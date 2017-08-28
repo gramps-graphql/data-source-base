@@ -1,4 +1,4 @@
-import { GraphQLConnector } from '@console/graphql-data-source-helpers';
+import { GraphQLConnector } from '@console/gramps';
 
 // TODO: change `YourDataSourceConnector` to a descriptive name
 export default class YourDataSourceConnector extends GraphQLConnector {

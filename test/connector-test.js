@@ -1,4 +1,4 @@
-import { GraphQLConnector } from '@console/graphql-data-source-helpers';
+import { GraphQLConnector } from '@console/gramps';
 import Connector from '../src/connector';
 
 // TODO: Update the data source name.
