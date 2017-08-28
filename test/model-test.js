@@ -1,4 +1,4 @@
-import { GraphQLModel } from '@console/graphql-data-source-helpers';
+import { GraphQLModel } from '@console/gramps';
 import Model from '../src/model';
 import Connector from '../src/connector';
 
