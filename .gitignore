@@ -6,10 +6,5 @@ node_modules
 # Don’t include the built module; npm will do that for us
 dist
 
-# Don’t include sensitive data
-config/app_env_private.json
-
 # Testing directories
 coverage
-.nyc_output
-sonarlint.json

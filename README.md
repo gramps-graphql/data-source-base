@@ -1,57 +1,68 @@
-# Bluemix GraphQL Data Source Base
+# GrAMPS GraphQL Data Source Base
 
-- Provides templates for npm, Travis CI, and SonarQube
-- Provides TODO comments next to all items that need to be edited
-- Starts with the simplest possible example code to limit how much boilerplate editing is required
-- Starts you off right with test coverage at 💯
-- Provides testing helpers for common resolver testing patterns
-- Comes with docs! https://ibm.biz/graphql-data-source
+This is a minimal example and boilerplate for a GrAMPS data source. Inside, you’ll find:
+
+ -  **Connector** — how to access the data source (e.g. a REST API)
+ -  **Model** — methods to retrieve/modify data from the data source (e.g. a 
+    CRUD wrapper)
+ -  **Schema** — description for GraphQL to interpret the data (see the 
+    [GraphQL docs on schemas](http://graphql.org/learn/schema/))
+ -  **Resolvers** — functions to map the results of calls to model methods to
+    the schema
+
+Each file contains a `TODO` comment explaining the changes you’ll need to make to create a working data source.
+
+The goal of this repo is to provide enough code to allow a working example of a data source and its related tests, but to limit how much boilerplate needs to be edited to get your own data source implemented.
+
+## Code Quality and Continuous Integration
+
+To help ensure a reliable, easy-to-maintain data source, this example also includes:
+
+ -  Configuration for Travis CI (for automated testing) and Code Climate
+    (for quality analysis)
+ -  Starts you off right with test coverage at 💯
+ -  Provides testing helpers for common resolver testing patterns
+ -  Comes with docs! https://ibm.biz/graphql-data-source
 
 ## Quickstart
 
+**NOTE:** Replace all instances of `YOUR_DATA_SOURCE_NAME` with the actual name you want to use (e.g. `data-source-companyname-datatype`).
+
 ```sh
 # Clone the repo
-git clone git@github.ibm.com:Bluemix/graphql-data-source-base.git graphql-data-source-YOUR_DATA_SOURCE_NAME
+git clone git@github.com:gramps-graphql/data-source-base.git data-source-YOUR_DATA_SOURCE_NAME
 
 # Move into it
-cd graphql-data-source-YOUR_DATA_SOURCE_NAME/
+cd data-source-YOUR_DATA_SOURCE_NAME/
 
 # Change the remote repo
-git remote set-url origin git@github.ibm.com:Bluemix/YOUR_REPO_NAME.git
+git remote set-url origin git@github.com:USER_OR_ORG/YOUR_REPO_NAME.git
 
-# Create a package.json
-cp package.TEMPLATE.json package.json
-
-# IMPORTANT: Edit name, description, author, and repository in package.json
+# IMPORTANT: Make sure to edit the name, description, contributors, and 
+# repository fields in package.json
 
 # Install dependencies
-npm install
+yarn install
 ```
 
-### To Develop In Local Mode
+### To Develop with Mock Data
 
 Start the app with the following command:
 
 ```sh
-# Run in local mode with mock data
-npm run local
+# Develop with mock data
+yarn mock-data
 ```
 
-### To Develop in Atlas Mode
+### To Develop with Live Data
 
-Create `config/app_env_private.json` by duplicating `config/app_env_private.TEMPLATE.json`. Inside, add the required private environment variables.
-
-> **NOTE:** Information on where to get the required environment variables can 
-> be found in the "How do I configure my application to use Bluemix?" section 
-> of [this FAQ](https://ibm.biz/BdjXjr).
-
-Next, start the app in Atlas mode:
+Once you’ve got your data source configured to load live data, you can enable live data in development:
 
 ```sh
-# Run in Atlas mode with live data
-npm run atlas
+# Develop with live data
+yarn live-data
 ```
 
 ### Notes for Developers
 
-Currently, there is no watch capability (PRs welcome!), so the service needs to be stopped (`control` + `C`) and restarted (`npm run [local|atlas]`) to reflect new changes to the data source.
+Currently, there is no watch capability (PRs welcome!), so the service needs to be stopped (`control` + `C`) and restarted (`yarn [mock-data|live-data]`) to reflect new changes to the data source.

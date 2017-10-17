@@ -1,0 +1,81 @@
+{
+  "name": "@gramps/data-source-base",
+  "description": "Base modules for a GrAMPS GraphQL data source.",
+  "contributors": [
+    "Jason Lengstorf <jason@lengstorf.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gramps-graphql/data-source-base.git"
+  },
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "prepush": "npm test",
+    "prebuild": "del-cli ./dist",
+    "build": "babel src -d dist",
+    "dev": "gramps --data-source-dir ./",
+    "mock-data": "npm run dev -- --mock",
+    "live-data": "npm run dev -- --live",
+    "lint": "eslint src/",
+    "test:unit": "NODE_ENV=test jest --coverage",
+    "test": "npm run lint --silent && npm run test:unit --silent",
+    "semantic-release": "semantic-release pre && npm publish --access public && semantic-release post"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@gramps/gramps-express": "^0.1.3",
+    "casual": "^1.5.14"
+  },
+  "peerDependencies": {
+    "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0",
+    "graphql-tools": "^1.2.1 || ^2.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^8.0.1",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-inline-import": "^2.0.6",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "del-cli": "^1.1.0",
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "graphql": "^0.11.7",
+    "graphql-tools": "^2.5.1",
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "nodemon": "^1.11.0",
+    "prettier": "^1.5.3",
+    "semantic-release": "^8.2.0"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "version": "0.0.0-semantic-release"
+}
