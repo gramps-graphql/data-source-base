@@ -13,7 +13,10 @@ export default {
     YourDataSource: (rootValue, { id }, context) =>
       new Promise((resolve, reject) => {
         // TODO: Update to use the model and call the proper method.
-        context.YourDataSource.getById(id).then(resolve).catch(reject);
+        context.YourDataSource
+          .getById(id)
+          .then(resolve)
+          .catch(reject);
       }),
   },
 

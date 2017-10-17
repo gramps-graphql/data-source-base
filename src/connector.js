@@ -1,4 +1,4 @@
-import { GraphQLConnector } from '@console/gramps';
+import { GraphQLConnector } from '@gramps/gramps-express';
 
 // TODO: change `YourDataSourceConnector` to a descriptive name
 export default class YourDataSourceConnector extends GraphQLConnector {

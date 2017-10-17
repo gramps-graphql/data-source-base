@@ -1,4 +1,4 @@
-import { GraphQLModel, GrampsError } from '@console/gramps';
+import { GraphQLModel, GrampsError } from '@gramps/gramps-express';
 
 /*
  * For more information on data source models, see
@@ -13,32 +13,35 @@ export default class YourDataSourceModel extends GraphQLModel {
    * @return {Promise}     resolves with the loaded user data
    */
   getById(id) {
-    return this.connector
-      .get(`/data/${id}`)
-      .catch(res => this.handleError(res));
+    return this.connector.get(`/data/${id}`).catch(res =>
+      this.throwError(res, {
+        description: 'This is an example call. Add your own!',
+        docsLink:
+          'https://gramps-graphql.github.io/gramps-express/data-source/tutorial/',
+      }),
+    );
   }
 
   /**
-   * Throws a GrampsError using information from the error response.
-   *
-   * @see https://ibm.biz/graphql-helpers
-   *
-   * @param  {object} response  an error response
+   * Throws a custom GrAMPS error.
+   * @param  {Object}  error            the API error
+   * @param  {Object?} customErrorData  additional error data to display
    * @return {void}
    */
-  handleError(response) {
-    // TODO: map your endpoint’s error response to the GrampsError format.
-    throw GrampsError({
-      // An HTTP status code (e.g. 404).
-      statusCode: response.statusCode,
-      // A human-readable description of what went wrong (e.g. "Page not found").
-      description: response.error.description,
-      // An error code for looking up troubleshooting info (e.g. "MyApp_Err_NotFound").
-      errorCode: response.error.error_code,
-      // The endpoint that GraphQL was attempting to load (e.g. "https://api.example.org/user/123").
-      targetEndpoint: response.options.uri,
-      // The class where the error originated. (Don’t change this.)
+  throwError(error, customErrorData = {}) {
+    // TODO Edit these defaults to be helpful for people using your data source.
+    const defaults = {
+      statusCode: error.statusCode || 500,
+      errorCode: `${this.constructor.name}_Error`,
+      description: error.message || 'Something went wrong.',
+      targetEndpoint: error.options ? error.options.uri : null,
       graphqlModel: this.constructor.name,
+      docsLink: null,
+    };
+
+    throw GrampsError({
+      ...defaults,
+      ...customErrorData,
     });
   }
 }
