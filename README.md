@@ -1,5 +1,7 @@
 # GrAMPS GraphQL Data Source Base
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/gramps-graphql/data-source-base.svg)](https://greenkeeper.io/)
+
 This is a minimal example and boilerplate for a GrAMPS data source. Inside, you’ll find:
 
  -  **Connector** — how to access the data source (e.g. a REST API)
