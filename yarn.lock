@@ -1176,7 +1176,7 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-casual@^1.5.17:
+casual@^1.5.14:
   version "1.5.17"
   resolved "https://registry.yarnpkg.com/casual/-/casual-1.5.17.tgz#a0d64ddef10bf27f1c47b2d353954e51c27a6422"
   dependencies:
