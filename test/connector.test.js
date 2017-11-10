@@ -12,6 +12,6 @@ describe(`${DATA_SOURCE_NAME}Connector`, () => {
 
   it('uses the appropriate URL', () => {
     // TODO: Update the data source API endpoint.
-    expect(connector.apiBaseUri).toBe(`https://example.org/v2`);
+    expect(connector.apiBaseUri).toBe(`http://localhost:3000`);
   });
 });

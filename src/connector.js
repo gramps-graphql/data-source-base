@@ -6,5 +6,5 @@ export default class YourDataSourceConnector extends GraphQLConnector {
    * TODO: describe this API endpoint
    * @member {string}
    */
-  apiBaseUri = `https://example.org/v2`;
+  apiBaseUri = `http://localhost:3000`;
 }
