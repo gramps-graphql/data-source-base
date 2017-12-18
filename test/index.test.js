@@ -1,27 +1,26 @@
 import dataSource from '../src';
-import Model from '../src/model';
 
 // TODO: Update the data source name.
-const DATA_SOURCE_NAME = 'YourDataSource';
+const DATA_SOURCE_NAME = 'DataSourceBase';
 
 describe(`Data Source: ${DATA_SOURCE_NAME}`, () => {
-  it('returns a context type', () => {
-    expect(dataSource.context).toBe(DATA_SOURCE_NAME);
+  it('contains a namespace property', () => {
+    expect(dataSource.namespace).toBe(DATA_SOURCE_NAME);
   });
 
-  it('returns a model', () => {
-    expect(dataSource.model).toBeInstanceOf(Model);
+  it('contains a context property', () => {
+    expect(dataSource.context).toBeTruthy();
   });
 
-  it('returns a schema', () => {
-    expect(dataSource.schema).toBeTruthy();
+  it('contains a typeDefs property', () => {
+    expect(dataSource.typeDefs).toBeTruthy();
   });
 
-  it('returns a resolver object', () => {
-    expect(Object.keys(dataSource.resolvers)).toEqual([
-      'queryResolvers',
-      'dataResolvers',
-      'mockResolvers',
-    ]);
+  it('contains a resolvers property', () => {
+    expect(dataSource.resolvers).toBeTruthy();
+  });
+
+  it('contains a mocks property', () => {
+    expect(dataSource.mocks).toBeTruthy();
   });
 });

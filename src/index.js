@@ -1,7 +1,7 @@
-import schema from './schema.graphql';
+import typeDefs from './schema.graphql';
+import context from './context';
 import resolvers from './resolvers';
-import Connector from './connector';
-import Model from './model';
+import mocks from './mocks';
 
 /*
  * For more information on the main data source object, see
@@ -9,8 +9,9 @@ import Model from './model';
  */
 export default {
   // TODO: Rename the context to describe the data source.
-  context: 'YourDataSource',
-  model: new Model({ connector: new Connector() }),
-  schema,
+  namespace: 'DataSourceBase',
+  context,
+  typeDefs,
   resolvers,
+  mocks,
 };
