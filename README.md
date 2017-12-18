@@ -1,17 +1,17 @@
-<img src="https://gramps-graphql.github.io/gramps-express/assets/img/gramps-banner.png" alt="GrAMPS · An easier way to manage the data sources powering your GraphQL server" width="450">
+<a href="https://gramps.js.org/"><img src="https://gramps.js.org/assets/img/gramps-banner.png" alt="GrAMPS · An easier way to manage the data sources powering your GraphQL server" width="450"></a>
 
 # GrAMPS GraphQL Data Source Base
 [![Build Status](https://travis-ci.org/gramps-graphql/data-source-base.svg?branch=master)](https://travis-ci.org/gramps-graphql/data-source-base) [![Maintainability](https://api.codeclimate.com/v1/badges/ac264833fac1fbd1afe0/maintainability)](https://codeclimate.com/github/gramps-graphql/data-source-base/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ac264833fac1fbd1afe0/test_coverage)](https://codeclimate.com/github/gramps-graphql/data-source-base/test_coverage) [![npm version](https://img.shields.io/npm/v/@gramps/data-source-base.svg?style=flat)](https://www.npmjs.com/package/@gramps/data-source-base) [![Greenkeeper badge](https://badges.greenkeeper.io/gramps-graphql/data-source-base.svg)](https://greenkeeper.io/)
 
 This is a minimal example and boilerplate for a GrAMPS data source. Inside, you’ll find:
 
- -  **Connector** — how to access the data source (e.g. a REST API)
- -  **Model** — methods to retrieve/modify data from the data source (e.g. a 
-    CRUD wrapper)
- -  **Schema** — description for GraphQL to interpret the data (see the 
+ -  **Context** — an object with methods to retrieve/modify data from the data 
+    source (e.g. a CRUD wrapper)
+ -  **Schema** — type definitions for GraphQL to interpret the data (see the 
     [GraphQL docs on schemas](http://graphql.org/learn/schema/))
  -  **Resolvers** — functions to map the results of calls to model methods to
     the schema
+ -  **Mock Resolvers** — mock functions for offline development
 
 Each file contains a `TODO` comment explaining the changes you’ll need to make to create a working data source.
 
@@ -32,20 +32,32 @@ To help ensure a reliable, easy-to-maintain data source, this example also inclu
 **NOTE:** Replace all instances of `YOUR_DATA_SOURCE_NAME` with the actual name you want to use (e.g. `data-source-companyname-datatype`).
 
 ```sh
-# Clone the repo
-git clone git@github.com:gramps-graphql/data-source-base.git data-source-YOUR_DATA_SOURCE_NAME
+# Get a copy of the data source
+npx degit gramps-graphql/data-source-base data-source-YOUR_DATA_SOURCE_NAME
 
 # Move into it
 cd data-source-YOUR_DATA_SOURCE_NAME/
-
-# Change the remote repo
-git remote set-url origin git@github.com:USER_OR_ORG/YOUR_REPO_NAME.git
 
 # IMPORTANT: Make sure to edit the name, description, contributors, and 
 # repository fields in package.json
 
 # Install dependencies
-yarn install
+yarn
+
+# Start the dev server
+yarn dev
+```
+
+You'll see a message with URLs for the GraphQL gateway and the [GraphQL Playground](https://github.com/graphcool/graphql-playground). Open the Playground link (usually http://localhost:8080/playground if you don’t already have something running on port 8080), then run a query:
+
+```graphql
+{
+  getById(id: 123) {
+    id
+    name
+    lucky_numbers
+  }
+}
 ```
 
 ### To Develop with Mock Data
@@ -53,19 +65,10 @@ yarn install
 Start the app with the following command:
 
 ```sh
-# Develop with mock data
-yarn mock-data
-```
-
-### To Develop with Live Data
-
-Once you’ve got your data source configured to load live data, you can enable live data in development:
-
-```sh
-# Develop with live data
-yarn live-data
+# Start the gateway with mock data
+yarn dev --mock
 ```
 
 ### Notes for Developers
 
-Currently, there is no watch capability (PRs welcome!), so the service needs to be stopped (`control` + `C`) and restarted (`yarn [mock-data|live-data]`) to reflect new changes to the data source.
+Currently, there is no watch capability (PRs welcome!), so the service needs to be stopped (`control` + `C`) and restarted (`yarn dev`) to reflect new changes to the data source.
