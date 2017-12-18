@@ -22,7 +22,7 @@
     "dev": "gramps dev --data-source .",
     "dev:mock-data": "gramps dev --data-source . --mock",
     "lint": "eslint src/",
-    "test:unit": "NODE_ENV=test jest --coverage",
+    "test:unit": "cross-env NODE_ENV=test jest --coverage",
     "test": "npm run lint --silent && npm run test:unit --silent",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -46,6 +46,7 @@
     "babel-plugin-inline-import": "^2.0.6",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.1.1",
     "del-cli": "^1.1.0",
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "^12.1.0",
