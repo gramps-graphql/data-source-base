@@ -1,14 +1,13 @@
-# The query/queries to access data MUST extend the Query type.
-extend type Query {
+type Query {
   # TODO: rename and add a description of this query
-  YourDataSource(
+  getById(
     # TODO: Describe this argument
     id: ID!
-  ): PFX_YourDataSource
+  ): PFX_DataSourceBase
 }
 
 # TODO: Choose a unique prefix and rename the type descriptively.
-type PFX_YourDataSource {
+type PFX_DataSourceBase {
   # The unique ID of the thing.
   id: ID!
   # Describe each field to help people use the data more effectively.
