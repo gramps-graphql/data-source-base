@@ -4,8 +4,10 @@
  *
  * @see https://github.com/graphql-cli/graphql-cli
  */
-const fs = require('fs');
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 const globby = require('globby');
+const fs = require('fs');
 
 function replaceInFile(filePath, searchValue, replaceValue) {
   const contents = fs.readFileSync(filePath, 'utf8');
@@ -54,6 +56,7 @@ module.exports = async ({ project, context }) => {
 
   replaceDefaultStringsInFiles({ ...opts, templateName, project });
 
+  // eslint-disable-next-line no-console
   console.log(`
 
 💥  You’re all set: a new GrAMPS data source has been created!
