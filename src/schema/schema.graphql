@@ -1,3 +1,5 @@
+# import PFX_MyType from 'secondschema.graphql'
+
 type Query {
   # TODO: rename and add a description of this query
   getById(
@@ -16,4 +18,6 @@ type PFX_DataSourceBase {
   #
   # DISCLAIMER: The luckiness of these numbers is _not scientifically proven_.
   lucky_numbers: [Int]
+  
+  my_type: PFX_MyType
 }

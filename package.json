@@ -17,7 +17,8 @@
   ],
   "scripts": {
     "prepush": "npm test",
-    "prebuild": "del-cli ./dist",
+    "prebuild": "del-cli ./dist && npm run schema:bundle",
+    "schema:bundle": "graphql bundle ./src/schema/schema.graphql -o ./src/schema.bundled.graphql",
     "build": "babel src -d dist",
     "dev": "gramps dev --data-source .",
     "dev:mock-data": "gramps dev --data-source . --mock",
@@ -53,6 +54,8 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.4.0",
     "graphql": "^0.12.3",
+    "graphql-cli": "^2.1.3",
+    "graphql-cli-bundle": "^0.1.2",
     "graphql-tools": "^2.14.1",
     "husky": "^0.14.3",
     "jest": "^22.0.4",

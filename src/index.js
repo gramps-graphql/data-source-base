@@ -1,4 +1,4 @@
-import typeDefs from './schema.graphql';
+import typeDefs from './schema.bundled.graphql';
 import context from './context';
 import resolvers from './resolvers';
 import mocks from './mocks';
