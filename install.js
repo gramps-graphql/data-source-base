@@ -58,7 +58,6 @@ module.exports = async ({ project, context }) => {
 
   // eslint-disable-next-line no-console
   console.log(`
-
 💥  You’re all set: a new GrAMPS data source has been created!
 
 💡  Don’t forget to update "description", "contributors", and
