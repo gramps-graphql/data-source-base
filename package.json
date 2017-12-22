@@ -18,7 +18,7 @@
   "scripts": {
     "prepush": "npm test",
     "prebuild": "del-cli ./dist && npm run schema:bundle",
-    "schema:bundle": "graphql bundle ./src/schema/schema.graphql -o ./src/schema.bundled.graphql",
+    "schema:bundle": "graphql bundle ./src/schema/schema.graphql -o ./src/schema.bundled.graphql -f",
     "build": "babel src -d dist",
     "dev": "gramps dev --data-source .",
     "dev:mock-data": "gramps dev --data-source . --mock",
