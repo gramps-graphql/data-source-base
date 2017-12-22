@@ -17,7 +17,7 @@ npx graphql-cli create -b gramps-graphql/data-source-base data-source-mydata
 # 📂 move into the newly-created data source
 cd $_
 
-# 🚀 start the Playground with your spankin’ new data source
+# 🚀 start the GraphQL Playground with your spankin’ new data source
 yarn dev
 ```
 
@@ -25,54 +25,7 @@ yarn dev
 
 > **ALSO NOTE:** `$_` is a handy shortcut for using the last argument passed to the previous command. It [also does other stuff](https://unix.stackexchange.com/questions/280453/understand-the-meaning-of), but that's a rabbit hole for another time.
 
-## What's Inside?
-
-Inside, you’ll find:
-
-* **Context** — an object with methods to retrieve/modify data from the data
-  source (e.g. a CRUD wrapper)
-* **Schema** — type definitions for GraphQL to interpret the data (see the
-  [GraphQL docs on schemas](http://graphql.org/learn/schema/))
-* **Resolvers** — functions to map the results of calls to model methods to
-  the schema
-* **Mock Resolvers** — mock functions for offline development
-
-Each file contains a `TODO` comment explaining the changes you’ll need to make to create a working data source.
-
-The goal of this repo is to provide enough code to allow a working example of a data source and its related tests, but to limit how much boilerplate needs to be edited to get your own data source implemented.
-
-## Code Quality and Continuous Integration
-
-To help ensure a reliable, easy-to-maintain data source, this example also includes:
-
-* Configuration for Travis CI (for automated testing) and Code Climate
-  (for quality analysis)
-* Starts you off right with test coverage at 💯
-* Provides testing helpers for common resolver testing patterns
-* Comes with docs! https://ibm.biz/graphql-data-source
-
-## Quickstart
-
-**NOTE:** Replace all instances of `YOUR_DATA_SOURCE_NAME` with the actual name you want to use (e.g. `data-source-companyname-datatype`).
-
-```sh
-# Get a copy of the data source
-npx degit gramps-graphql/data-source-base data-source-YOUR_DATA_SOURCE_NAME
-
-# Move into it
-cd data-source-YOUR_DATA_SOURCE_NAME/
-
-# IMPORTANT: Make sure to edit the name, description, contributors, and
-# repository fields in package.json
-
-# Install dependencies
-yarn
-
-# Start the dev server
-yarn dev
-```
-
-You'll see a message with URLs for the GraphQL gateway and the [GraphQL Playground](https://github.com/graphcool/graphql-playground). Open the Playground link (usually http://localhost:8080/playground if you don’t already have something running on port 8080), then run a query:
+After running `yarn dev`, you’ll see a message with URLs for the GraphQL gateway and the [GraphQL Playground](https://github.com/graphcool/graphql-playground). Open the Playground link (usually http://localhost:8080/playground if you don’t already have something running on port 8080), then run a query:
 
 ```graphql
 {
@@ -86,12 +39,51 @@ You'll see a message with URLs for the GraphQL gateway and the [GraphQL Playgrou
 
 ### To Develop with Mock Data
 
-Start the app with the following command:
+Add the `--mock` flag to enable mock data, which is helpful for working offline.
 
 ```sh
 # Start the gateway with mock data
 yarn dev --mock
 ```
+
+See `src/mocks.js` to modify your mock resolvers.
+
+> **NOTE:** For more information on the GrAMPS CLI and its available options, [check out the docs](https://gramps.js.org/cli/cli-overview/).
+
+### To Run the Tests
+
+GrAMPS data sources start you off with 100% test coverage so you can build high-reliability GraphQL servers without a bunch of setup work.
+
+Run the tests with:
+
+```bash
+yarn test
+```
+
+## What's Inside?
+
+Inside, you’ll find:
+
+* **Schema** — type definitions for GraphQL to interpret the data (see the
+  [GraphQL docs on schemas](http://graphql.org/learn/schema/))
+* **Resolvers** — functions to map the results of calls to model methods to
+  the schema
+* **Mock Resolvers** — mock functions for offline development
+* **Context** — an object with methods to interact with data that is passed to resolver functions
+
+Each file contains a `TODO` comment explaining the changes you’ll need to make to create a working data source.
+
+The goal of this repo is to provide enough code to allow a working example of a data source and its related tests, but to limit how much boilerplate needs to be edited to get your own data source implemented.
+
+## Code Quality and Continuous Integration
+
+To help ensure a reliable, easy-to-maintain data source, this example also includes:
+
+* Configuration for Travis CI (for automated testing) and Code Climate
+  (for quality analysis)
+* Starts you off right with test coverage at 💯
+* Provides testing helpers for common resolver testing patterns
+* Comes with docs! https://gramps.js.org/data-source/data-source-overview/
 
 ### Notes for Developers
 
