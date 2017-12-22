@@ -8,6 +8,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const globby = require('globby');
 const fs = require('fs');
+const pkg = require('./package.json');
 
 function replaceInFile(filePath, searchValue, replaceValue) {
   const contents = fs.readFileSync(filePath, 'utf8');
@@ -20,7 +21,7 @@ function replaceInFile(filePath, searchValue, replaceValue) {
 
 function replaceDefaultStringsInFiles(
   { namespace, prefix, templateName, project },
-  fileGlob = '{src,test}/**/*',
+  fileGlob = ['{src,test}/**/*', 'package.json'],
 ) {
   const sourceFiles = globby.sync(fileGlob);
   const newType = `${prefix}_${namespace}`;
@@ -52,9 +53,8 @@ const questions = [
 
 module.exports = async ({ project, context }) => {
   const opts = await context.prompt(questions);
-  const templateName = '@gramps/data-source-base';
 
-  replaceDefaultStringsInFiles({ ...opts, templateName, project });
+  replaceDefaultStringsInFiles({ ...opts, templateName: pkg.name, project });
 
   // eslint-disable-next-line no-console
   console.log(`
