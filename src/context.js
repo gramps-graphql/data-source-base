@@ -1,3 +1,4 @@
+// TODO Add methods to access your data.
 export default {
   getById: id => ({
     id,

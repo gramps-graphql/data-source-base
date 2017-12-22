@@ -4,8 +4,8 @@ import resolvers from './resolvers';
 import mocks from './mocks';
 
 /*
- * For more information on the main data source object, see
- * https://ibm.biz/graphql-data-source-main
+ * For more information on the building GrAMPS data sources, see
+ * https://gramps.js.org/data-source/data-source-overview/
  */
 export default {
   // TODO: Rename the context to describe the data source.

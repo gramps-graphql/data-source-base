@@ -1,16 +1,19 @@
 type Query {
   # TODO: rename and add a description of this query
   getById(
-    # TODO: Describe this argument
+    # A unique identifier
     id: ID!
   ): PFX_DataSourceBase
 }
 
 # TODO: Choose a unique prefix and rename the type descriptively.
 type PFX_DataSourceBase {
-  # The unique ID of the thing.
+  # A unique identifier
   id: ID!
   # Describe each field to help people use the data more effectively.
   name: String
+  # An array of very super lucky numbers.
+  #
+  # DISCLAIMER: The luckiness of these numbers is _not scientifically proven_.
   lucky_numbers: [Int]
 }
