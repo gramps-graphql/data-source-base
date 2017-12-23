@@ -1,11 +1,9 @@
 import dataSource from '../src';
 
 // TODO: Update the data source name.
-const DATA_SOURCE_NAME = 'DataSourceBase';
-
-describe(`Data Source: ${DATA_SOURCE_NAME}`, () => {
+describe(`Data Source: DataSourceBase`, () => {
   it('contains a namespace property', () => {
-    expect(dataSource.namespace).toBe(DATA_SOURCE_NAME);
+    expect(dataSource.namespace).toBe('DataSourceBase');
   });
 
   it('contains a context property', () => {

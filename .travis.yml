@@ -3,6 +3,14 @@ cache:
   yarn: true
   directories:
   - node_modules
+env:
+  global:
+  # Code Climate is an excellent tool for tracking code quality.
+  # It’s free for open source, too! Set it up here: http://bit.ly/2l0mvp9
+  #
+  # To track code coverage, you’ll need this test reporter ID.
+  # Visit Settings => Test coverage on your Code Climate project dashboard
+  - CC_TEST_REPORTER_ID=
 node_js:
 - 6
 - 8
@@ -24,6 +32,3 @@ branches:
   only:
   - master
   - /^greenkeeper/.*$/
-env:
-  global:
-  - CC_TEST_REPORTER_ID=3f97d4ca639289c139796067359d46e7583e2d83701a315e40c1d1f58567afa8
