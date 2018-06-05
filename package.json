@@ -44,7 +44,7 @@
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.3",
     "babel-jest": "^22.0.4",
-    "babel-plugin-inline-import": "^2.0.6",
+    "babel-plugin-inline-import": "^3.0.0",
     "babel-preset-env": "^1.6.1",
     "cpy-cli": "^1.0.1",
     "cross-env": "^5.1.3",
