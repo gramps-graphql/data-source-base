@@ -39,7 +39,7 @@
     "graphql-tools": "^1.2.1 || ^2.5.1"
   },
   "devDependencies": {
-    "@gramps/cli": "^1.1.3",
+    "@gramps/cli": "^1.5.1",
     "@gramps/gramps": "^1.1.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.3",
