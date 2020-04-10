@@ -57,7 +57,7 @@
     "globby": "^7.1.1",
     "graphql": "^0.12.3",
     "graphql-tools": "^2.14.1",
-    "husky": "^0.14.3",
+    "husky": "^4.2.5",
     "inquirer": "^4.0.1",
     "jest": "^22.0.4",
     "prettier": "^1.9.2",
